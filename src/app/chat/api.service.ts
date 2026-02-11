@@ -9,7 +9,7 @@ function resolveBaseUrl(): string {
   const isHF = location.hostname.endsWith('hf.space');
   if (isHF) return 'https://majemaai-mj-learn-backend.hf.space/rag';
   if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return 'http://localhost:5000/rag';
-  return 'https://pylearn-backend-production.up.railway.app/rag';
+  return 'https://mjlearn-backend-production.up.railway.app/rag';
 }
 
 @Injectable({ providedIn: 'root' })

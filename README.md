@@ -1,5 +1,5 @@
 ---
-title: Nj-learn
+title: Mj-learn
 sdk: static
 app_file: dist/gramm-ai/browser/index.html
 pinned: false

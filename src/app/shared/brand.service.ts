@@ -46,11 +46,11 @@ export class BrandService {
     let brandName: BrandName = 'Py-Learn'; // default to Py-Learn for type safety
     let logoPath = 'assets/images/pykara-logo.png';
 
-    if (url.includes('pykara-py-learn')) {
+    if (url.includes('https://pykara.net/py-learn')) {
       brandName = 'Py-Learn';
       logoPath = 'assets/images/pykara-logo.png';
       this.showFooter = true;
-    } else if (url.includes('majemaai-mj-learn')) {
+    } else if (url.includes('https://pykara.net/mj-learn')) {
       brandName = 'MJ-Learn';
       logoPath = 'assets/images/majema-logo.png';
       this.showFooter = true;
