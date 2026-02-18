@@ -6,7 +6,7 @@
 
 .staticchat-container {
   height: 100vh;
-  background: url('/assets/staticchat/bg-layout.png') repeat;
+  background: url('https://pykara.ai/mj-learn/assets/staticchat/bg-layout.png') repeat;
 }
 .nav-bar {
   background-color: rgb(25 34 69);
