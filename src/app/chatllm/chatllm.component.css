@@ -149,30 +149,68 @@
   }
 }
 
-/* ===== SUGGESTIONS DROPDOWN ===== */
-.suggestions-box {
-  /* background: rgba(0,0,0,0.75);*/
-  background: linear-gradient(135deg, #0072ff, #00c6ff );
-  max-height: 250px;
+/* ✅ OPTION A (CSS only) — Glass dropdown without changing your HTML */
+
+/* Your suggestions container is currently a normal block.
+   Make it feel like a dropdown and match the glass theme. */
+.suggestions-box{
+  /* keep it in the same place (no absolute) */
+  margin: 0 16px 12px 16px;
+
+  /* remove hard width, make it align with chat-input */
+  width: calc(100% - 32px);
+
+  max-height: 260px;
   overflow-y: auto;
+
+  border-radius: 16px;
+  padding: 8px;
+
+  /* glass look */
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* suggestion row */
+.suggestion-item{
+  padding: 12px 14px;
   border-radius: 12px;
-  margin: 0 20px 10px 20px;
-  width: 47vw;
-}
-
-.suggestion-item {
-  padding: 10px 14px;
   cursor: pointer;
-  color: white;
-  font-size:1vw;
-  font-weight:bold;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  transition: background 0.2s ease;
+
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
+
+  /* safer than 1vw */
+  font-size: clamp(13px, 0.95vw, 16px);
+
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.12);
+
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
 }
 
-  .suggestion-item:hover {
-    background: rgba(255,255,255,0.15);
-  }
+.suggestion-item:hover{
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.22);
+  transform: translateY(-1px);
+}
+
+.suggestion-item:active{
+  transform: translateY(0);
+}
+
+/* scrollbar */
+.suggestions-box::-webkit-scrollbar{
+  width: 6px;
+}
+.suggestions-box::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,0.25);
+  border-radius: 10px;
+}
 
 /* ===== INPUT BAR ===== */
 .chat-input {
@@ -529,6 +567,6 @@
 }
 
 .back-btn{ 
- width: 6vw;
+ width: 5vw;
  top: 2.2vw; 
 }

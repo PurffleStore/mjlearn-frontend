@@ -95,6 +95,7 @@ export class ChatLLMComponent implements OnInit, AfterViewInit {
 
   private uploadInProgress = false;
   isSpeechProcessing = false;
+  isInputFocused = false;
 
   constructor(
     private fb: FormBuilder,
@@ -134,7 +135,7 @@ export class ChatLLMComponent implements OnInit, AfterViewInit {
     this.loadAllQuestions();
 
     // ✅ Load initial suggestions from backend (/api/suggestions)
-    this.loadInitialSuggestionsFromApi();
+    //this.loadInitialSuggestionsFromApi();
 
     // start at last pair by default
     setTimeout(() => this.scrollToLastPair(), 0);
@@ -344,13 +345,33 @@ cycleMedia(botMsg: any, mediaType: string, indexChange: number = 1) {
     });
   }
 
-  onInputFocus() { this.showQuestionSuggestions(); }
-  onInputClick() { this.showQuestionSuggestions(); }
+  onInputFocus() {
+  this.isInputFocused = true;
+  this.showQuestionSuggestions();
+}
+
+onInputClick() {
+  this.isInputFocused = true;
+  this.showQuestionSuggestions();
+}
+
+// Add this new function
+onInputBlur() {
+  // small delay so click on suggestion works
+  setTimeout(() => {
+    this.isInputFocused = false;
+    this.showSuggestions = false;
+  }, 150);
+}
 
   // ✅ Same place for suggestions:
   // - If followups exist -> show followups
   // - Else -> show initial suggestions from backend
   showQuestionSuggestions() {
+    if (!this.isInputFocused) {
+    this.showSuggestions = false;
+    return;
+  }
     const currentInput = (this.chatForm.get('message')?.value || '').trim();
 
     // While typing -> local autocomplete (optional)
@@ -487,10 +508,11 @@ cycleMedia(botMsg: any, mediaType: string, indexChange: number = 1) {
           .slice(0, 5);
 
         this.suggestedQuestions = this.followupQuestions;
-        this.showSuggestions = this.suggestedQuestions.length > 0;
+        this.showSuggestions = this.isInputFocused && this.suggestedQuestions.length > 0;
       } else {
         this.followupQuestions = [];
         this.loadInitialSuggestionsFromApi();
+        this.showSuggestions = this.isInputFocused && this.suggestedQuestions.length > 0;
       }
     },
 

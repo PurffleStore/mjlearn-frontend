@@ -1,7 +1,7 @@
 
 
 <div class="staticchat-container">
-   <img routerLink="/" src="assets/staticchat/back.png" class="back-btn"/>
+   <img routerLink="/" src="assets/staticchat/home.png" class="back-btn"/>
   <div class="nav-bar">
    
     MJ-CHAT</div>
@@ -221,7 +221,9 @@
                #messageInput
                [placeholder]="isListening ? '⏺ Listening...' : 'Type your message...'"
                (focus)="onInputFocus()"
-               (input)="onInputChange()"
+                (click)="onInputClick()"
+                (blur)="onInputBlur()"
+                (input)="onInputChange()"
                [readonly]="isSpeechProcessing || isListening" />
 
         <button type="button"
