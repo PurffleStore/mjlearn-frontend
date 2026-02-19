@@ -791,9 +791,27 @@ showContentText(pair: { user?: ChatMessage, bot?: any }, type: 'detail' | 'story
     return '';
   }
 
-  async toggleMic() {
-    if (!this.supported || this.isListening || this.uploadInProgress) return;
+  private pauseVideoAndStopAudioForMic(): void {
+  // 1) Pause video (keep current frame)
+  const video = this.safeVideo();
+  if (video && !video.paused) {
+    video.pause();
+    this.isVideoPlaying = false;
+  }
 
+  // 2) Stop audio completely
+  if (this.audioPlayer) {
+    try {
+      this.audioPlayer.pause();
+      this.audioPlayer.currentTime = 0;
+    } catch {}
+  }
+}
+
+  async toggleMic() {
+    
+    if (!this.supported || this.isListening || this.uploadInProgress) return;
+    this.pauseVideoAndStopAudioForMic();
     try {
       this.mediaStream = await navigator.mediaDevices.getUserMedia({
         audio: { echoCancellation: true, noiseSuppression: true },
