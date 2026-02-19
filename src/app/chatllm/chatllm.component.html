@@ -30,7 +30,7 @@
           <div *ngIf="pair.bot" class="message-row bot-row">
             <img src="assets/staticchat/teacher.png" class="avatar" />
             <div class="message-bubble bot-message">
-              <span>{{ pair.bot.text }}</span>
+              <span fitText [fitTextMaxVw]="1.5" [fitTextMinPx]="12">{{ pair.bot.text }}</span>
 
                <!-- Media buttons section - replace the existing mediaRow div -->
 <div class="mediaRow"

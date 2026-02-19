@@ -120,7 +120,7 @@ export class ChatLLMComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.messages.push({
       id: 1,
-      text: 'Hello children! Today we will learn tenses in a simple and fun way.',
+      text: "Good morning! Let's begin our lesson on tenses. You can ask me any question about tenses",
       sender: 'bot',
       timestamp: new Date()
     });
